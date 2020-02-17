@@ -5,7 +5,7 @@ build: .gitignore
 
 .gitignore:
 	echo $(OUT) > .gitignore
-	echo .gitignore > .gitignore
+	echo .gitignore >> .gitignore
 
 clean:
 	rm $(OUT)
