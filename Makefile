@@ -1,7 +1,7 @@
 OUT = $(shell basename $(PWD))
 
 build: .gitignore
-	cc main.c -o $(OUT)
+	cc main.c -g -o $(OUT)
 
 .gitignore:
 	echo $(OUT) > .gitignore
