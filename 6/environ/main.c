@@ -13,5 +13,6 @@ int main(int argc, char *argv[])
 {
 	jsetenv("SHELL", "/bin/ksh", 1);
 	jsetenv("ZZZZZ", "zzzzzzzz", 0);
+	junsetenv("HOME");
 	jprintenv();
 }

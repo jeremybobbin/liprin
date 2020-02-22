@@ -27,7 +27,7 @@ char **initenv()
 			return NULL;
 		strcpy(*j, *e);
 	}
-	return jenviron;
+	return environ = jenviron;
 }
 
 
@@ -53,6 +53,7 @@ int jputenv(char *s)
 	return 0;
 }
 
+
 char *jgetenv(char *s)
 {
 	char **e;
@@ -63,6 +64,7 @@ char *jgetenv(char *s)
 		if (strncmp(s, *e, nlen) == 0 && *e && (*e)[nlen] == '=')
 			return *e+nlen+1;
 }
+
 
 int jsetenv(const char *name, const char *value, int override)
 {
@@ -102,6 +104,20 @@ int jsetenv(const char *name, const char *value, int override)
 
 	strcpy(d + nlen+1, value);
 	return 0;
+}
+
+int junsetenv(const char *name)
+{
+	char **e;
+	int nlen = strlen(name);
+	/* locate variable */
+	for (e = jenviron; *e; e++)
+		if (strncmp(name, *e, nlen) == 0 && *e && (*e)[nlen] == '=')
+			break;
+
+	free(*e);
+	*e = jenviron[--envlen];
+	jenviron[envlen] = NULL;
 }
 
 void jprintenv()
